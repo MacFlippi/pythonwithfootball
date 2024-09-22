@@ -74,3 +74,32 @@ print(df['Shooting']>5)
 
 #Now lets display the data frame only with players matching our criteria by subsetting it
 print(df[df['Shooting']>5])
+
+#Lets set up a new data frame for transfer targets
+dftrans = pd.DataFrame({'Wage':[150000,123000,np.nan],
+'GoalBonus':[4000,np.nan,np.nan],
+'ImageRights':[50000,70000,100000]},
+index=['Konda','Makho','Grey'],
+columns=['Wage','GoalBonus','ImageRights'])
+
+print(dftrans)
+
+#We could drop rows or columns with missing values
+dftra_row = dftrans.dropna()
+print(dftra_row)
+
+dftra_col = dftrans.dropna(axis=1)
+print(dftra_col)
+
+#We can also just drop rows/columns with missing values beyond a threshold
+dftra_row = dftrans.dropna(thresh=2)
+print(dftra_row)
+
+#Sometimes deleting rows is a bit overreaction so we can fill the missing values
+dftra_row = dftrans.fillna(value=0)
+print(dftra_row)
+
+#We can also calculate a value and fill issing values with that
+#For example the averges
+dftra_row = dftrans['Wage'].fillna(value=dftrans['Wage'].mean())
+print(dftra_row)
